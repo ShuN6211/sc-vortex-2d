@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "sc-vortex-2d"
+version = "0.1.0"
+description = ""
+authors = ["Shun Makino <shunmakino6211@gmail.com>"]
+readme = "README.md"
+packages = [{include = "sc_vortex_2d", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
