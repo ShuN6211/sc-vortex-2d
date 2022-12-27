@@ -30,45 +30,54 @@ class VortexInstanceT03(VortexInstance):
 
     def __init__(self) -> None:
         self.kfr: List[float]
-        self.delta: interpolate.CubicSpline
+        self.pair_potential: interpolate.CubicSpline
         self.u_dict: Dict[int, interpolate.CubicHermiteSpline]
         self.v_dict: Dict[int, interpolate.CubicHermiteSpline]
         self.spectra_dict: Dict[int, float]
+        self.construct_flag = True
 
     def construct(self) -> None:
-        with gzip.open(JsonPath.KFR_PATH.value, "r") as f:
-            kfr_dict: Dict[str, List[float]] = json.load(f)
-            self.kfr = kfr_dict[JsonKey.KFR_KEY.value]
+        if self.construct_flag:
+            with gzip.open(JsonPath.KFR_PATH.value, "r") as f:
+                kfr_dict: Dict[str, List[float]] = json.load(f)
+                self.kfr = kfr_dict[JsonKey.KFR_KEY.value]
 
-        with gzip.open(JsonPath.DELTA_T03_PATH.value, "r") as f:
-            delta_dict: Dict[str, List[float]] = json.load(f)
-            self.delta = make_spline(self.kfr, delta_dict[JsonKey.DELTA_KEY.value])
+            with gzip.open(JsonPath.DELTA_T03_PATH.value, "r") as f:
+                delta_dict: Dict[str, List[float]] = json.load(f)
+                self.pair_potential = make_spline(self.kfr, delta_dict[JsonKey.DELTA_KEY.value])
 
-        with gzip.open(JsonPath.SPECTRA_T03_PATH.value, "r") as f:
-            spectra_dict: Dict[str, float] = json.load(f)
-            for i in range(
-                self.Parameters.MIN_ANGULAR_MOMENTUM,
-                self.Parameters.MAX_ANGULAR_MOMENTUM + 1,
-            ):
-                self.spectra_dict[i] = spectra_dict[f"{i}"]
+            with gzip.open(JsonPath.SPECTRA_T03_PATH.value, "r") as f:
+                spectra_dict: Dict[str, float] = json.load(f)
+                for i in range(
+                    self.Parameters.MIN_ANGULAR_MOMENTUM,
+                    self.Parameters.MAX_ANGULAR_MOMENTUM + 1,
+                ):
+                    self.spectra_dict[i] = spectra_dict[f"{i}"]
 
-        with gzip.open(JsonPath.U_T03_PATH.value, "r") as f:
-            u_dict: Dict[str, List[float]] = json.load(f)
-            for i in range(
-                self.Parameters.MIN_ANGULAR_MOMENTUM,
-                self.Parameters.MAX_ANGULAR_MOMENTUM + 1,
-            ):
-                self.u_dict[i] = make_spline(self.kfr, u_dict[f"{i}"])
+            with gzip.open(JsonPath.U_T03_PATH.value, "r") as f:
+                u_dict: Dict[str, List[float]] = json.load(f)
+                for i in range(
+                    self.Parameters.MIN_ANGULAR_MOMENTUM,
+                    self.Parameters.MAX_ANGULAR_MOMENTUM + 1,
+                ):
+                    self.u_dict[i] = make_spline(self.kfr, u_dict[f"{i}"])
 
-        with gzip.open(JsonPath.V_T03_PATH.value, "r") as f:
-            v_dict: Dict[str, List[float]] = json.load(f)
-            for i in range(
-                self.Parameters.MIN_ANGULAR_MOMENTUM,
-                self.Parameters.MAX_ANGULAR_MOMENTUM + 1,
-            ):
-                self.v_dict[i] = make_spline(self.kfr, v_dict[f"{i}"])
+            with gzip.open(JsonPath.V_T03_PATH.value, "r") as f:
+                v_dict: Dict[str, List[float]] = json.load(f)
+                for i in range(
+                    self.Parameters.MIN_ANGULAR_MOMENTUM,
+                    self.Parameters.MAX_ANGULAR_MOMENTUM + 1,
+                ):
+                    self.v_dict[i] = make_spline(self.kfr, v_dict[f"{i}"])
+            self.construct_flag = False
 
-    def get():
+    def get_pair_potential(self) -> interpolate.CubicSpline:
+        return self.pair_potential
+
+    def get_ith_eigen_func():
+        pass
+
+    def get_ith_eigen_energy():
         pass
 
 
@@ -84,7 +93,13 @@ class VortexInstanceT05(VortexInstance):
         MAX_ANGULAR_MOMENTUM = 69
         MIN_ANGULAR_MOMENTUM = -70
 
-    def get():
+    def get_pair_potential(self) -> interpolate.CubicSpline:
+        pass
+
+    def get_ith_eigen_func():
+        pass
+
+    def get_ith_eigen_energy():
         pass
 
 
@@ -100,11 +115,17 @@ class VortexInstanceT08(VortexInstance):
         MAX_ANGULAR_MOMENTUM = 69
         MIN_ANGULAR_MOMENTUM = -70
 
-    def get():
+    def get_pair_potential(self) -> interpolate.CubicSpline:
+        pass
+
+    def get_ith_eigen_func():
+        pass
+
+    def get_ith_eigen_energy():
         pass
 
 
-def make_spline(x_vector: List[float], f: List[float]):
+def make_spline(x_vector: List[float], f: List[float]) -> interpolate.CubicSpline:
     return interpolate.CubicSpline(x_vector, f)
 
 
