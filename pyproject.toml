@@ -8,6 +8,7 @@ packages = [{include = "sc_vortex_2d", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+scipy = "^1.9.3"
 
 
 [tool.poetry.group.dev.dependencies]
