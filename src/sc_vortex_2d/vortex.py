@@ -1,4 +1,4 @@
-from vortex_instance import VortexInstance
+from .vortex_instance import VortexInstance
 import json
 import gzip
 from enum import Enum
