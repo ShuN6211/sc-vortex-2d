@@ -44,7 +44,9 @@ class VortexInstanceT03(VortexInstance):
 
             with gzip.open(JsonPath.DELTA_T03_PATH.value, "r") as f:
                 delta_dict: Dict[str, List[float]] = json.load(f)
-                self.pair_potential = make_spline(self.kfr, delta_dict[JsonKey.DELTA_KEY.value])
+                self.pair_potential = make_spline(
+                    self.kfr, delta_dict[JsonKey.DELTA_KEY.value]
+                )
 
             with gzip.open(JsonPath.SPECTRA_T03_PATH.value, "r") as f:
                 spectra_dict: Dict[str, float] = json.load(f)
