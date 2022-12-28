@@ -49,24 +49,24 @@ class VortexInstanceT03(VortexInstance):
             with gzip.open(JsonPath.SPECTRA_T03_PATH.value, "r") as f:
                 spectra_dict: Dict[str, float] = json.load(f)
                 for i in range(
-                    self.Parameters.MIN_ANGULAR_MOMENTUM,
-                    self.Parameters.MAX_ANGULAR_MOMENTUM + 1,
+                    self.Parameters.MIN_ANGULAR_MOMENTUM.value,
+                    self.Parameters.MAX_ANGULAR_MOMENTUM.value + 1,
                 ):
                     self.spectra_dict[i] = spectra_dict[f"{i}"]
 
             with gzip.open(JsonPath.U_T03_PATH.value, "r") as f:
                 u_dict: Dict[str, List[float]] = json.load(f)
                 for i in range(
-                    self.Parameters.MIN_ANGULAR_MOMENTUM,
-                    self.Parameters.MAX_ANGULAR_MOMENTUM + 1,
+                    self.Parameters.MIN_ANGULAR_MOMENTUM.value,
+                    self.Parameters.MAX_ANGULAR_MOMENTUM.value + 1,
                 ):
                     self.u_dict[i] = make_spline(self.kfr, u_dict[f"{i}"])
 
             with gzip.open(JsonPath.V_T03_PATH.value, "r") as f:
                 v_dict: Dict[str, List[float]] = json.load(f)
                 for i in range(
-                    self.Parameters.MIN_ANGULAR_MOMENTUM,
-                    self.Parameters.MAX_ANGULAR_MOMENTUM + 1,
+                    self.Parameters.MIN_ANGULAR_MOMENTUM.value,
+                    self.Parameters.MAX_ANGULAR_MOMENTUM.value + 1,
                 ):
                     self.v_dict[i] = make_spline(self.kfr, v_dict[f"{i}"])
             self.construct_flag = False
