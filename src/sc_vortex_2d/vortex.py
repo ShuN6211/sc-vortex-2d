@@ -6,7 +6,7 @@ from scipy import interpolate
 from typing import Dict, List
 
 
-class JsonPath(str, Enum):
+class _JsonPath(str, Enum):
     KFR_PATH = "./json/kfr.json.gz"
     DELTA_T03_PATH = "./json/T03/delta.json.gz"
     SPECTRA_T03_PATH = "./json/T03/spectra.json.gz"
@@ -14,7 +14,7 @@ class JsonPath(str, Enum):
     V_T03_PATH = "./json/T03/v.json.gz"
 
 
-class JsonKey(str, Enum):
+class _JsonKey(str, Enum):
     DELTA_KEY = "delta"
     DELTA_OVER_CDGM_KEY = "delta_over_CdGM"
     KFR_KEY = "kfr"
@@ -38,17 +38,17 @@ class VortexInstanceT03(VortexInstance):
 
     def construct(self) -> None:
         if self.construct_flag:
-            with gzip.open(JsonPath.KFR_PATH.value, "r") as f:
+            with gzip.open(_JsonPath.KFR_PATH.value, "r") as f:
                 kfr_dict: Dict[str, List[float]] = json.load(f)
-                self.kfr = kfr_dict[JsonKey.KFR_KEY.value]
+                self.kfr = kfr_dict[_JsonKey.KFR_KEY.value]
 
-            with gzip.open(JsonPath.DELTA_T03_PATH.value, "r") as f:
+            with gzip.open(_JsonPath.DELTA_T03_PATH.value, "r") as f:
                 delta_dict: Dict[str, List[float]] = json.load(f)
-                self.pair_potential = make_spline(
-                    self.kfr, delta_dict[JsonKey.DELTA_KEY.value]
+                self.pair_potential = _make_spline(
+                    self.kfr, delta_dict[_JsonKey.DELTA_KEY.value]
                 )
 
-            with gzip.open(JsonPath.SPECTRA_T03_PATH.value, "r") as f:
+            with gzip.open(_JsonPath.SPECTRA_T03_PATH.value, "r") as f:
                 spectra_dict: Dict[str, float] = json.load(f)
                 for i in range(
                     self.Parameters.MIN_ANGULAR_MOMENTUM.value,
@@ -56,21 +56,21 @@ class VortexInstanceT03(VortexInstance):
                 ):
                     self.spectra_dict[i] = spectra_dict[f"{i}"]
 
-            with gzip.open(JsonPath.U_T03_PATH.value, "r") as f:
+            with gzip.open(_JsonPath.U_T03_PATH.value, "r") as f:
                 u_dict: Dict[str, List[float]] = json.load(f)
                 for i in range(
                     self.Parameters.MIN_ANGULAR_MOMENTUM.value,
                     self.Parameters.MAX_ANGULAR_MOMENTUM.value + 1,
                 ):
-                    self.u_dict[i] = make_spline(self.kfr, u_dict[f"{i}"])
+                    self.u_dict[i] = _make_spline(self.kfr, u_dict[f"{i}"])
 
-            with gzip.open(JsonPath.V_T03_PATH.value, "r") as f:
+            with gzip.open(_JsonPath.V_T03_PATH.value, "r") as f:
                 v_dict: Dict[str, List[float]] = json.load(f)
                 for i in range(
                     self.Parameters.MIN_ANGULAR_MOMENTUM.value,
                     self.Parameters.MAX_ANGULAR_MOMENTUM.value + 1,
                 ):
-                    self.v_dict[i] = make_spline(self.kfr, v_dict[f"{i}"])
+                    self.v_dict[i] = _make_spline(self.kfr, v_dict[f"{i}"])
             self.construct_flag = False
 
     def get_pair_potential(self) -> interpolate.CubicSpline:
@@ -127,7 +127,7 @@ class VortexInstanceT08(VortexInstance):
         pass
 
 
-def make_spline(x_vector: List[float], f: List[float]) -> interpolate.CubicSpline:
+def _make_spline(x_vector: List[float], f: List[float]) -> interpolate.CubicSpline:
     return interpolate.CubicSpline(x_vector, f)
 
 
