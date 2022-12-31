@@ -31,9 +31,9 @@ class VortexInstanceT03(VortexInstance):
 
     def __init__(self) -> None:
         self.pair_potential: interpolate.CubicSpline
-        self.u_dict: Dict[int, interpolate.CubicSpline]
-        self.v_dict: Dict[int, interpolate.CubicSpline]
-        self.spectra_dict: Dict[int, float]
+        self.u_dict: Dict[int, interpolate.CubicSpline] = dict()
+        self.v_dict: Dict[int, interpolate.CubicSpline] = dict()
+        self.spectra_dict: Dict[int, float] = dict()
         self.construct()
 
     def construct(self) -> None:
@@ -41,7 +41,7 @@ class VortexInstanceT03(VortexInstance):
         kfr: List[float] = [
             i * 0.1
             for i in range(
-                0, self.Parameters.SIZE_KF.value + 1
+                0, self.Parameters.SIZE_KF.value * 10 + 1
             )  # [0.0, 0.1, 0.2, ..., 400]
         ]
 
@@ -59,14 +59,14 @@ class VortexInstanceT03(VortexInstance):
             t03, _FileName.v.value
         ) as v:
             self.spectra_dict = pickle.load(spc)
-            u_dict = pickle.load(u)
-            v_dict = pickle.load(v)
+            u_load = pickle.load(u)
+            v_load = pickle.load(v)
             for i in range(
                 self.Parameters.MIN_ANGULAR_MOMENTUM.value,
                 self.Parameters.MAX_ANGULAR_MOMENTUM.value + 1,
-            ):
-                self.u_dict[i] = _make_spline(kfr, u_dict[f"{i}"])
-                self.v_dict[i] = _make_spline(kfr, v_dict[f"{i}"])
+            ):  
+                self.u_dict[i] = _make_spline(kfr, u_load[i])
+                self.v_dict[i] = _make_spline(kfr, v_load[i])
 
     def get_pair_potential(self) -> interpolate.CubicSpline:
         return self.pair_potential
@@ -80,8 +80,7 @@ class VortexInstanceT03(VortexInstance):
         return self.spectra_dict[i]
 
 
-def cdgm_t03(x: float):
-    pass
+
 
 
 class VortexInstanceT05(VortexInstance):
