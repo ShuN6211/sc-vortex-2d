@@ -1,23 +1,23 @@
-from .vortex_instance import VortexInstance
-import json
-import gzip
+import importlib.resources
+import pickle
 from enum import Enum
+from typing import Dict, List, Tuple
+
 from scipy import interpolate
-from typing import Dict, List
+
+from .data_vortex import t03, t05, t08
+from .vortex_instance import VortexInstance
 
 
-class _JsonPath(str, Enum):
-    KFR_PATH = "./json/kfr.json.gz"
-    DELTA_T03_PATH = "./json/T03/delta.json.gz"
-    SPECTRA_T03_PATH = "./json/T03/spectra.json.gz"
-    U_T03_PATH = "./json/T03/u.json.gz"
-    V_T03_PATH = "./json/T03/v.json.gz"
-
-
-class _JsonKey(str, Enum):
+class _DictKey(str, Enum):
     DELTA_KEY = "delta"
-    DELTA_OVER_CDGM_KEY = "delta_over_CdGM"
-    KFR_KEY = "kfr"
+
+
+class _FileName(str, Enum):
+    delta = "delta.pkl"
+    spectra = "spectra.pkl"
+    u = "u.pkl"
+    v = "v.pkl"
 
 
 class VortexInstanceT03(VortexInstance):
@@ -27,60 +27,57 @@ class VortexInstanceT03(VortexInstance):
         T_OVER_TC = 0.3
         MAX_ANGULAR_MOMENTUM = 69
         MIN_ANGULAR_MOMENTUM = -70
+        SIZE_KF = 400
 
     def __init__(self) -> None:
-        self.kfr: List[float]
         self.pair_potential: interpolate.CubicSpline
-        self.u_dict: Dict[int, interpolate.CubicHermiteSpline]
-        self.v_dict: Dict[int, interpolate.CubicHermiteSpline]
+        self.u_dict: Dict[int, interpolate.CubicSpline]
+        self.v_dict: Dict[int, interpolate.CubicSpline]
         self.spectra_dict: Dict[int, float]
-        self.construct_flag = True
+        self.construct()
 
     def construct(self) -> None:
-        if self.construct_flag:
-            with gzip.open(_JsonPath.KFR_PATH.value, "r") as f:
-                kfr_dict: Dict[str, List[float]] = json.load(f)
-                self.kfr = kfr_dict[_JsonKey.KFR_KEY.value]
 
-            with gzip.open(_JsonPath.DELTA_T03_PATH.value, "r") as f:
-                delta_dict: Dict[str, List[float]] = json.load(f)
-                self.pair_potential = _make_spline(
-                    self.kfr, delta_dict[_JsonKey.DELTA_KEY.value]
-                )
+        kfr: List[float] = [
+            i * 0.1
+            for i in range(
+                0, self.Parameters.SIZE_KF.value + 1
+            )  # [0.0, 0.1, 0.2, ..., 400]
+        ]
 
-            with gzip.open(_JsonPath.SPECTRA_T03_PATH.value, "r") as f:
-                spectra_dict: Dict[str, float] = json.load(f)
-                for i in range(
-                    self.Parameters.MIN_ANGULAR_MOMENTUM.value,
-                    self.Parameters.MAX_ANGULAR_MOMENTUM.value + 1,
-                ):
-                    self.spectra_dict[i] = spectra_dict[f"{i}"]
+        with importlib.resources.open_binary(t03, _FileName.delta.value) as f:
+            delta_dict: Dict[str, List[float]] = pickle.load(f)
+            self.pair_potential = _make_spline(
+                kfr, delta_dict[_DictKey.DELTA_KEY.value]
+            )
 
-            with gzip.open(_JsonPath.U_T03_PATH.value, "r") as f:
-                u_dict: Dict[str, List[float]] = json.load(f)
-                for i in range(
-                    self.Parameters.MIN_ANGULAR_MOMENTUM.value,
-                    self.Parameters.MAX_ANGULAR_MOMENTUM.value + 1,
-                ):
-                    self.u_dict[i] = _make_spline(self.kfr, u_dict[f"{i}"])
-
-            with gzip.open(_JsonPath.V_T03_PATH.value, "r") as f:
-                v_dict: Dict[str, List[float]] = json.load(f)
-                for i in range(
-                    self.Parameters.MIN_ANGULAR_MOMENTUM.value,
-                    self.Parameters.MAX_ANGULAR_MOMENTUM.value + 1,
-                ):
-                    self.v_dict[i] = _make_spline(self.kfr, v_dict[f"{i}"])
-            self.construct_flag = False
+        with importlib.resources.open_binary(
+            t03, _FileName.spectra.value
+        ) as spc, importlib.resources.open_binary(
+            t03, _FileName.u.value
+        ) as u, importlib.resources.open_binary(
+            t03, _FileName.v.value
+        ) as v:
+            self.spectra_dict = pickle.load(spc)
+            u_dict = pickle.load(u)
+            v_dict = pickle.load(v)
+            for i in range(
+                self.Parameters.MIN_ANGULAR_MOMENTUM.value,
+                self.Parameters.MAX_ANGULAR_MOMENTUM.value + 1,
+            ):
+                self.u_dict[i] = _make_spline(kfr, u_dict[f"{i}"])
+                self.v_dict[i] = _make_spline(kfr, v_dict[f"{i}"])
 
     def get_pair_potential(self) -> interpolate.CubicSpline:
         return self.pair_potential
 
-    def get_ith_eigen_func():
-        pass
+    def get_ith_eigen_func(
+        self, i: int
+    ) -> Tuple[interpolate.CubicSpline, interpolate.CubicSpline]:
+        return self.u_dict[i], self.v_dict[i]
 
-    def get_ith_eigen_energy():
-        pass
+    def get_ith_eigen_energy(self, i: int):
+        return self.spectra_dict[i]
 
 
 def cdgm_t03(x: float):
