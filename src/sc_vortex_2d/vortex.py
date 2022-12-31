@@ -5,7 +5,7 @@ from typing import Dict, List, Tuple
 
 from scipy import interpolate
 
-from .data_vortex import t03, t05, t08
+from .data_vortex import temperature_03, temperature_05, temperature_08
 from .vortex_instance import VortexInstance
 
 
@@ -45,7 +45,7 @@ class VortexInstanceT03(VortexInstance):
 
     def construct(self) -> None:
         self.pair_potential, self.spectra_dict, self.u_dict, self.v_dict = _construct(
-            t03
+            temperature_03
         )
 
     def get_pair_potential(self) -> interpolate.CubicSpline:
@@ -78,7 +78,7 @@ class VortexInstanceT05(VortexInstance):
 
     def construct(self) -> None:
         self.pair_potential, self.spectra_dict, self.u_dict, self.v_dict = _construct(
-            t05
+            temperature_05
         )
 
     def get_pair_potential(self) -> interpolate.CubicSpline:
@@ -111,7 +111,7 @@ class VortexInstanceT08(VortexInstance):
 
     def construct(self) -> None:
         self.pair_potential, self.spectra_dict, self.u_dict, self.v_dict = _construct(
-            t08
+            temperature_08
         )
 
     def get_pair_potential(self) -> interpolate.CubicSpline:
