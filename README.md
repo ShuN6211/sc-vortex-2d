@@ -26,7 +26,6 @@ $$
 \mathcal{U}_{n}(r, \theta) \\
 \mathcal{V}_{n}(r, \theta)
 \end{bmatrix}
-=
 $$
 
 $$
