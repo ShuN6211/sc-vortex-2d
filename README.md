@@ -21,16 +21,7 @@ $$
 Here, BdG eq is rewritten in dimensionless form using Pippard length $\xi_{0} = \hbar v_{F}/\Delta_{0}$ and zero-temperature bulk gap $\Delta_{0}$.
 $f(E_{q})$ is Fermi distribution function. Solutions in an isolated vortex, especially CdGM mode is given by following form.
 
-$$
-\begin{bmatrix}
-\mathcal{U}_{n}(r, \theta) \\ \mathcal{V}_{n}(r, \theta)
-\end{bmatrix}
-=
-\frac{1}{\sqrt{2\pi}}
-\begin{bmatrix}
-u_{n}(r)e^{i(n-1)\theta} \\ v_{n}(r)e^{in\theta}
-\end{bmatrix}
-$$
+<img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}\mathcal{U}_{n}(r,&space;\theta)&space;\\\mathcal{V}_{n}(r,&space;\theta)\end{bmatrix}=\frac{1}{\sqrt{2\pi}}\begin{bmatrix}u_{n}(r)e^{i(n-1)\theta}&space;\\v_{n}(r)e^{in\theta}\end{bmatrix}" title="https://latex.codecogs.com/svg.image?\begin{bmatrix}\mathcal{U}_{n}(r, \theta) \\\mathcal{V}_{n}(r, \theta)\end{bmatrix}=\frac{1}{\sqrt{2\pi}}\begin{bmatrix}u_{n}(r)e^{i(n-1)\theta} \\v_{n}(r)e^{in\theta}\end{bmatrix}" />
 
 Here, $n$ corresponds to angular momentum quantum number, i.e. CdGM mode is characterized by this number. In this library, the range of $n$ is integers of in $[-70, 69]$. Note that the part of $u_{n}(r), v_{n}(r)$ in the right side of above formula is one of the target of this library, not the left side of it.
 
