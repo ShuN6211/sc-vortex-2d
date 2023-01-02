@@ -39,7 +39,7 @@ c
 \end{bmatrix}
 $$
 
-Here, $n$ corresponds to angular momentum quantum number, i.e. CdGM mode is characterized by this number. In this library, the range of $n$ is integers of in $[-70, 69]$. Note that the part of $u_{n}(r), v_{n}(r)$ in above formula is one of the target of this library, not $\mathcal{U}_{n}, \mathcal{V}_{n}$.
+Here, $n$ corresponds to angular momentum quantum number, i.e. CdGM mode is characterized by this number. In this library, the range of $n$ is integers of in $[-70, 69]$. Note that the part of $u_{n}(r), v_{n}(r)$ in above formula is one of the target of this library, not $\mathcal{U}_{n}$, $\mathcal{V}_{n}$.
 
 ## Install
 
