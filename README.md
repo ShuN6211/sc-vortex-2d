@@ -9,6 +9,7 @@ The state is got by solving Bogoliubov-de Gennes equation self-consistently.
 $$
 \left[-\frac{1}{2k_{F}\xi_{0}}\nabla^{2}-\mu\right]\mathcal{U}_{q}(\boldsymbol{r})+\Delta(\boldsymbol{r})\mathcal{V}_{q}(\boldsymbol{r}) = E_{q}\mathcal{U}_{q}(\boldsymbol{r}) 
 $$
+
 $$
 \left[\frac{1}{2k_{F}\xi_{0}}\nabla^{2}+\mu\right]\mathcal{V}_{q}(\boldsymbol{r})+\Delta^{*}(\boldsymbol{r})\mathcal{U}_{q}(\boldsymbol{r}) = E_{q}\mathcal{V}_{q}(\boldsymbol{r})  
 $$
