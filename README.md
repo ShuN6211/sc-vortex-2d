@@ -34,8 +34,8 @@ $$
 
 $$
 \begin{bmatrix}
-a & b \\
-c & d
+a  \\
+c 
 \end{bmatrix}
 $$
 
