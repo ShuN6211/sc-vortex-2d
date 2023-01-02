@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "sc-vortex-2d"
 version = "0.1.0"
-description = ""
+description = "Numerical result of CdGM mode."
 authors = ["Shun Makino <shunmakino6211@gmail.com>"]
 readme = "README.md"
 packages = [{include = "sc_vortex_2d", from = "src"}]
