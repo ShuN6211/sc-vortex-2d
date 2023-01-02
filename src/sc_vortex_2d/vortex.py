@@ -21,6 +21,21 @@ class _FileName(str, Enum):
 
 
 class GeneralParameters(Enum):
+    """GeneralParameters
+
+    Parameters independent of temperature.
+
+    Attributes:
+        KF_XI: Value of fermi wave vector multiplied by pippard length. This is
+               equivalent to value of 2 times zero-temperature bulk gap devided by
+               fermi energey. (k_F * xi = 2 * E_F / Delta_0)
+        MAX_ANGULAR_MOMENTUM: Max value of angular momentum quantum number.
+        MIN_ANGULAR_MOMENTUM: Min value of angular momentum quantum number.
+        SIZE_KF: Systemsize scaled by fermi wave vector, this is used in
+                 calculation of self-consistent equation(BdG).
+
+    """
+
     KF_XI = 50
     MAX_ANGULAR_MOMENTUM = 69
     MIN_ANGULAR_MOMENTUM = -70
@@ -29,6 +44,24 @@ class GeneralParameters(Enum):
 
 class VortexInstanceT03(VortexInstance):
     class Parameters(Enum):
+        """Parameters
+
+        Parameters involving parameters depending on temperature.
+
+        Attributes:
+            KF_XI: Value of fermi wave vector multiplied by pippard length. This is
+                   equivalent to value of 2 times zero-temperature bulk gap devided by
+                   fermi energey. (k_F * xi = 2 * E_F / Delta_0)
+            DELTA_OVER_CDGM: Value of zero-temperature bulk gap devided by
+                             level spacing of CdGM mode.
+            T_OVER_TC: Temperature scaled by taransition temperature T_c.
+            MAX_ANGULAR_MOMENTUM: Max value of angular momentum quantum number.
+            MIN_ANGULAR_MOMENTUM: Min value of angular momentum quantum number.
+            SIZE_KF: Systemsize scaled by fermi wave vector, this is used in
+                     calculation of self-consistent equation(BdG).
+
+        """
+
         KF_XI = GeneralParameters.KF_XI.value
         DELTA_OVER_CDGM = 31.363654447926976
         T_OVER_TC = 0.3
@@ -41,27 +74,76 @@ class VortexInstanceT03(VortexInstance):
         self.spectra_dict: Dict[int, float] = dict()
         self.u_dict: Dict[int, interpolate.CubicSpline] = dict()
         self.v_dict: Dict[int, interpolate.CubicSpline] = dict()
-        self.construct()
+        self._construct()
 
-    def construct(self) -> None:
+    def _construct(self) -> None:
         self.pair_potential, self.spectra_dict, self.u_dict, self.v_dict = _construct(
             temperature_03
         )
 
     def get_pair_potential(self) -> interpolate.CubicSpline:
+        """get_pair_potential()
+
+        This method returns pair potential at T = 0.3 T_c.
+        Radial coordinates is scaled by inverse of fermi wave vector.
+        Value of pair potential is scaled by zero-temperature bulk gap.
+
+        Returns:
+            scipy.interpolate.CubicSpline: pair potential at T = 0.3 T_c
+        """
         return self.pair_potential
 
     def get_ith_eigen_func(
         self, i: int
     ) -> Tuple[interpolate.CubicSpline, interpolate.CubicSpline]:
+        """get_ith_eigen_func()
+
+        This method returns ith eigen functions (u, v) at T = 0.3 T_c.
+        Radial coordinates is scaled by inverse of fermi wave vector.
+        As u and v have dimension of L.L, value of them
+        is scaled by 2 times fermi wave vector. (k_F * k_F)
+
+        Args:
+            i (int): Angular momentum quantum number you want to get.
+        Returns:
+            Tuple[scipy.interpolate.CubicSpline, scipy.interpolate.CubicSpline]:
+                ith eigen functions (u_i, v_i)
+        """
         return self.u_dict[i], self.v_dict[i]
 
-    def get_ith_eigen_energy(self, i: int):
+    def get_ith_eigen_energy(self, i: int) -> float:
+        """get_ith_eigen_energy()
+
+        This method returns ith eigen energy e_i at T = 0.3 T_c.
+
+        Args:
+            i (int): Angular momentum quantum number you want to get.
+        Returns:
+            float: Value of ith eigen energy e_i scaled by level spacing of CdGM mode.
+        """
         return self.spectra_dict[i]
 
 
 class VortexInstanceT05(VortexInstance):
     class Parameters(Enum):
+        """Parameters
+
+        Parameters involving parameters depending on temperature.
+
+        Attributes:
+            KF_XI: Value of fermi wave vector multiplied by pippard length. This is
+                   equivalent to value of 2 times zero-temperature bulk gap devided by
+                   fermi energey. (k_F * xi = 2 * E_F / Delta_0)
+            DELTA_OVER_CDGM: Value of zero-temperature bulk gap devided by
+                             level spacing of CdGM mode.
+            T_OVER_TC: Temperature scaled by taransition temperature T_c.
+            MAX_ANGULAR_MOMENTUM: Max value of angular momentum quantum number.
+            MIN_ANGULAR_MOMENTUM: Min value of angular momentum quantum number.
+            SIZE_KF: Systemsize scaled by fermi wave vector, this is used in
+                     calculation of self-consistent equation(BdG).
+
+        """
+
         KF_XI = GeneralParameters.KF_XI.value
         DELTA_OVER_CDGM = 43.66058913995896
         T_OVER_TC = 0.5
@@ -74,27 +156,76 @@ class VortexInstanceT05(VortexInstance):
         self.spectra_dict: Dict[int, float] = dict()
         self.u_dict: Dict[int, interpolate.CubicSpline] = dict()
         self.v_dict: Dict[int, interpolate.CubicSpline] = dict()
-        self.construct()
+        self._construct()
 
-    def construct(self) -> None:
+    def _construct(self) -> None:
         self.pair_potential, self.spectra_dict, self.u_dict, self.v_dict = _construct(
             temperature_05
         )
 
     def get_pair_potential(self) -> interpolate.CubicSpline:
+        """get_pair_potential()
+
+        This method returns pair potential at T = 0.5 T_c.
+        Radial coordinates is scaled by inverse of fermi wave vector.
+        Value of pair potential is scaled by zero-temperature bulk gap.
+
+        Returns:
+            scipy.interpolate.CubicSpline: pair potential at T = 0.5 T_c
+        """
         return self.pair_potential
 
     def get_ith_eigen_func(
         self, i: int
     ) -> Tuple[interpolate.CubicSpline, interpolate.CubicSpline]:
+        """get_ith_eigen_func()
+
+        This method returns ith eigen functions (u, v) at T = 0.5 T_c.
+        Radial coordinates is scaled by inverse of fermi wave vector.
+        As (u, v) have dimension of L.L, value of them
+        is scaled by 2 times fermi wave vector. (k_F * k_F)
+
+        Args:
+            i (int): Angular momentum quantum number you want to get.
+        Returns:
+            Tuple[scipy.interpolate.CubicSpline, scipy.interpolate.CubicSpline]:
+                ith eigen functions (u_i, v_i)
+        """
         return self.u_dict[i], self.v_dict[i]
 
     def get_ith_eigen_energy(self, i: int):
+        """get_ith_eigen_energy()
+
+        This method returns ith eigen energy e_i at T = 0.5 T_c.
+
+        Args:
+            i (int): Angular momentum quantum number you want to get.
+        Returns:
+            float: Value of ith eigen energy e_i scaled by level spacing of CdGM mode.
+        """
         return self.spectra_dict[i]
 
 
 class VortexInstanceT08(VortexInstance):
     class Parameters(Enum):
+        """Parameters
+
+        Parameters involving parameters depending on temperature.
+
+        Attributes:
+            KF_XI: Value of fermi wave vector multiplied by pippard length. This is
+                   equivalent to value of 2 times zero-temperature bulk gap devided by
+                   fermi energey. (k_F * xi = 2 * E_F / Delta_0)
+            DELTA_OVER_CDGM: Value of zero-temperature bulk gap devided by
+                             level spacing of CdGM mode.
+            T_OVER_TC: Temperature scaled by taransition temperature T_c.
+            MAX_ANGULAR_MOMENTUM: Max value of angular momentum quantum number.
+            MIN_ANGULAR_MOMENTUM: Min value of angular momentum quantum number.
+            SIZE_KF: Systemsize scaled by fermi wave vector, this is used in
+                     calculation of self-consistent equation(BdG).
+
+        """
+
         KF_XI = GeneralParameters.KF_XI.value
         DELTA_OVER_CDGM = 64.11317362045985
         T_OVER_TC = 0.8
@@ -107,22 +238,53 @@ class VortexInstanceT08(VortexInstance):
         self.spectra_dict: Dict[int, float] = dict()
         self.u_dict: Dict[int, interpolate.CubicSpline] = dict()
         self.v_dict: Dict[int, interpolate.CubicSpline] = dict()
-        self.construct()
+        self._construct()
 
-    def construct(self) -> None:
+    def _construct(self) -> None:
         self.pair_potential, self.spectra_dict, self.u_dict, self.v_dict = _construct(
             temperature_08
         )
 
     def get_pair_potential(self) -> interpolate.CubicSpline:
+        """get_pair_potential()
+
+        This method returns pair potential at T = 0.8 T_c.
+        Radial coordinates is scaled by inverse of fermi wave vector.
+        Value of pair potential is scaled by zero-temperature bulk gap.
+
+        Returns:
+            scipy.interpolate.CubicSpline: pair potential at T = 0.8 T_c.
+        """
         return self.pair_potential
 
     def get_ith_eigen_func(
         self, i: int
     ) -> Tuple[interpolate.CubicSpline, interpolate.CubicSpline]:
+        """get_ith_eigen_func()
+
+        This method returns ith eigen functions (u, v) at T = 0.8 T_c.
+        Radial coordinates is scaled by inverse of fermi wave vector.
+        As (u, v) have dimension of L.L, value of them
+        is scaled by 2 times fermi wave vector. (k_F * k_F)
+
+        Args:
+            i (int): Angular momentum quantum number you want to get.
+        Returns:
+            Tuple[scipy.interpolate.CubicSpline, scipy.interpolate.CubicSpline]:
+                ith eigen functions (u_i, v_i)
+        """
         return self.u_dict[i], self.v_dict[i]
 
     def get_ith_eigen_energy(self, i: int):
+        """get_ith_eigen_energy()
+
+        This method returns ith eigen energy e_i at T = 0.8 T_c.
+
+        Args:
+            i (int): Angular momentum quantum number you want to get.
+        Returns:
+            float: Value of ith eigen energy e_i scaled by level spacing of CdGM mode.
+        """
         return self.spectra_dict[i]
 
 
@@ -130,7 +292,7 @@ def _make_spline(x_vector: List[float], f: List[float]) -> interpolate.CubicSpli
     return interpolate.CubicSpline(x_vector, f)
 
 
-def _construct(package):
+def _construct(my_package):
     delta_dict: Dict[str, List[float]] = dict()
     u_dict: Dict[int, interpolate.CubicSpline] = dict()
     v_dict: Dict[int, interpolate.CubicSpline] = dict()
@@ -144,13 +306,13 @@ def _construct(package):
     ]
 
     with importlib.resources.open_binary(
-        package, _FileName.delta.value
+        my_package, _FileName.delta.value
     ) as delta, importlib.resources.open_binary(
-        package, _FileName.spectra.value
+        my_package, _FileName.spectra.value
     ) as spc, importlib.resources.open_binary(
-        package, _FileName.u.value
+        my_package, _FileName.u.value
     ) as u, importlib.resources.open_binary(
-        package, _FileName.v.value
+        my_package, _FileName.v.value
     ) as v:
 
         delta_dict: Dict[str, List[float]] = pickle.load(delta)
