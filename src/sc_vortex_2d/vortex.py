@@ -26,12 +26,12 @@ class GeneralParameters(Enum):
     Parameters independent of temperature.
 
     Attributes:
-        KF_XI: Value of fermi wave vector multiplied by pippard length. This is
+        KF_XI: Value of fermi wave number multiplied by pippard length. This is
                equivalent to value of 2 times zero-temperature bulk gap devided by
                fermi energey. (k_F * xi = 2 * E_F / Delta_0)
         MAX_ANGULAR_MOMENTUM: Max value of angular momentum quantum number.
         MIN_ANGULAR_MOMENTUM: Min value of angular momentum quantum number.
-        SIZE_KF: Systemsize scaled by fermi wave vector, this is used in
+        SIZE_KF: Systemsize scaled by fermi wave number, this is used in
                  calculation of self-consistent equation(BdG).
 
     """
@@ -49,7 +49,7 @@ class VortexInstanceT03(VortexInstance):
         Parameters involving parameters depending on temperature.
 
         Attributes:
-            KF_XI: Value of fermi wave vector multiplied by pippard length. This is
+            KF_XI: Value of fermi wave number multiplied by pippard length. This is
                    equivalent to value of 2 times zero-temperature bulk gap devided by
                    fermi energey. (k_F * xi = 2 * E_F / Delta_0)
             DELTA_OVER_CDGM: Value of zero-temperature bulk gap devided by
@@ -57,7 +57,7 @@ class VortexInstanceT03(VortexInstance):
             T_OVER_TC: Temperature scaled by taransition temperature T_c.
             MAX_ANGULAR_MOMENTUM: Max value of angular momentum quantum number.
             MIN_ANGULAR_MOMENTUM: Min value of angular momentum quantum number.
-            SIZE_KF: Systemsize scaled by fermi wave vector, this is used in
+            SIZE_KF: Systemsize scaled by fermi wave number, this is used in
                      calculation of self-consistent equation(BdG).
 
         """
@@ -85,7 +85,7 @@ class VortexInstanceT03(VortexInstance):
         """get_pair_potential()
 
         This method returns pair potential at T = 0.3 T_c.
-        Radial coordinates is scaled by inverse of fermi wave vector.
+        Radial coordinates is scaled by inverse of fermi wave number.
         Value of pair potential is scaled by zero-temperature bulk gap.
 
         Returns:
@@ -99,9 +99,9 @@ class VortexInstanceT03(VortexInstance):
         """get_ith_eigen_func()
 
         This method returns ith eigen functions (u, v) at T = 0.3 T_c.
-        Radial coordinates is scaled by inverse of fermi wave vector.
+        Radial coordinates is scaled by inverse of fermi wave number.
         As u and v have dimension of L.L, value of them
-        is scaled by 2 times fermi wave vector. (k_F * k_F)
+        is scaled by 2 times fermi wave number. (k_F * k_F)
 
         Args:
             i (int): Angular momentum quantum number you want to get.
@@ -131,7 +131,7 @@ class VortexInstanceT05(VortexInstance):
         Parameters involving parameters depending on temperature.
 
         Attributes:
-            KF_XI: Value of fermi wave vector multiplied by pippard length. This is
+            KF_XI: Value of fermi wave number multiplied by pippard length. This is
                    equivalent to value of 2 times zero-temperature bulk gap devided by
                    fermi energey. (k_F * xi = 2 * E_F / Delta_0)
             DELTA_OVER_CDGM: Value of zero-temperature bulk gap devided by
@@ -139,7 +139,7 @@ class VortexInstanceT05(VortexInstance):
             T_OVER_TC: Temperature scaled by taransition temperature T_c.
             MAX_ANGULAR_MOMENTUM: Max value of angular momentum quantum number.
             MIN_ANGULAR_MOMENTUM: Min value of angular momentum quantum number.
-            SIZE_KF: Systemsize scaled by fermi wave vector, this is used in
+            SIZE_KF: Systemsize scaled by fermi wave number, this is used in
                      calculation of self-consistent equation(BdG).
 
         """
@@ -167,7 +167,7 @@ class VortexInstanceT05(VortexInstance):
         """get_pair_potential()
 
         This method returns pair potential at T = 0.5 T_c.
-        Radial coordinates is scaled by inverse of fermi wave vector.
+        Radial coordinates is scaled by inverse of fermi wave number.
         Value of pair potential is scaled by zero-temperature bulk gap.
 
         Returns:
@@ -181,9 +181,9 @@ class VortexInstanceT05(VortexInstance):
         """get_ith_eigen_func()
 
         This method returns ith eigen functions (u, v) at T = 0.5 T_c.
-        Radial coordinates is scaled by inverse of fermi wave vector.
+        Radial coordinates is scaled by inverse of fermi wave number.
         As (u, v) have dimension of L.L, value of them
-        is scaled by 2 times fermi wave vector. (k_F * k_F)
+        is scaled by 2 times fermi wave number. (k_F * k_F)
 
         Args:
             i (int): Angular momentum quantum number you want to get.
@@ -213,7 +213,7 @@ class VortexInstanceT08(VortexInstance):
         Parameters involving parameters depending on temperature.
 
         Attributes:
-            KF_XI: Value of fermi wave vector multiplied by pippard length. This is
+            KF_XI: Value of fermi wave number multiplied by pippard length. This is
                    equivalent to value of 2 times zero-temperature bulk gap devided by
                    fermi energey. (k_F * xi = 2 * E_F / Delta_0)
             DELTA_OVER_CDGM: Value of zero-temperature bulk gap devided by
@@ -221,7 +221,7 @@ class VortexInstanceT08(VortexInstance):
             T_OVER_TC: Temperature scaled by taransition temperature T_c.
             MAX_ANGULAR_MOMENTUM: Max value of angular momentum quantum number.
             MIN_ANGULAR_MOMENTUM: Min value of angular momentum quantum number.
-            SIZE_KF: Systemsize scaled by fermi wave vector, this is used in
+            SIZE_KF: Systemsize scaled by fermi wave number, this is used in
                      calculation of self-consistent equation(BdG).
 
         """
@@ -249,7 +249,7 @@ class VortexInstanceT08(VortexInstance):
         """get_pair_potential()
 
         This method returns pair potential at T = 0.8 T_c.
-        Radial coordinates is scaled by inverse of fermi wave vector.
+        Radial coordinates is scaled by inverse of fermi wave number.
         Value of pair potential is scaled by zero-temperature bulk gap.
 
         Returns:
@@ -263,9 +263,9 @@ class VortexInstanceT08(VortexInstance):
         """get_ith_eigen_func()
 
         This method returns ith eigen functions (u, v) at T = 0.8 T_c.
-        Radial coordinates is scaled by inverse of fermi wave vector.
+        Radial coordinates is scaled by inverse of fermi wave number.
         As (u, v) have dimension of L.L, value of them
-        is scaled by 2 times fermi wave vector. (k_F * k_F)
+        is scaled by 2 times fermi wave number. (k_F * k_F)
 
         Args:
             i (int): Angular momentum quantum number you want to get.
