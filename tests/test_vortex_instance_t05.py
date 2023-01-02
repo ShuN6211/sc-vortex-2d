@@ -7,7 +7,7 @@ from src.sc_vortex_2d.vortex import VortexInstanceT05
 @pytest.fixture
 def make_instance() -> VortexInstanceT05:
     instance = VortexInstanceT05()
-    instance.construct()
+    instance._construct()
     return instance
 
 
