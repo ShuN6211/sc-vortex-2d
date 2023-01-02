@@ -13,3 +13,17 @@ $$
 $$
 \left[\frac{1}{2k_{F}\xi_{0}}\nabla^{2}+\mu\right]\mathcal{V}_{q}(\boldsymbol{r})+\Delta^{*}(\boldsymbol{r})\mathcal{U}_{q}(\boldsymbol{r}) = E_{q}\mathcal{V}_{q}(\boldsymbol{r})  
 $$
+
+$$
+\begin{bmatrix} 
+-\frac{1}{2k_{F}\xi_{0}}\nabla^{2} - \mu & \Delta(\bm{r}) \\
+\Delta(\bm{r})^{*} & \frac{1}{2k_{F}\xi_{0}}\nabla^{2} + \mu
+\end{bmatrix}
+\begin{bmatrix}
+\mathcal{U}_{q}(\bm{r}) \\ \mathcal{V}_{q}(\bm{r})
+\end{bmatrix}
+=E_{q}
+\begin{bmatrix}
+\mathcal{U}_{q}(\bm{r}) \\ \mathcal{V}_{q}(\bm{r})
+\end{bmatrix} 
+$$
