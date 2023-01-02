@@ -26,8 +26,7 @@ $$
 \mathcal{U}_{n}(r, \theta) \\
 \mathcal{V}_{n}(r, \theta)
 \end{bmatrix}
-=
-\frac{1}{\sqrt{2\pi}}
+=\frac{1}{\sqrt{2\pi}}
 \begin{bmatrix}
 u_{n}(r)e^{i(n-1)\theta} \\
 v_{n}(r)e^{in\theta}
