@@ -28,8 +28,8 @@ $$
 \end{bmatrix}
 =\frac{1}{\sqrt{2\pi}}
 \begin{bmatrix}
-u_{n}(r)e^{i(n-1)\theta} \\
-v_{n}(r)e^{in\theta}
+u_{n}(r)e^{in\theta} \\
+v_{n}(r)e^{i(n + 1)\theta}
 \end{bmatrix}
 $$
 
