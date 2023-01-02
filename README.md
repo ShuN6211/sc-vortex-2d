@@ -16,14 +16,14 @@ $$
 
 $$
 \begin{bmatrix} 
--\frac{1}{2k_{F}\xi_{0}}\nabla^{2} - \mu & \Delta(\bm{r}) \\
-\Delta(\bm{r})^{*} & \frac{1}{2k_{F}\xi_{0}}\nabla^{2} + \mu
+-\frac{1}{2k_{F}\xi_{0}}\nabla^{2} - \mu & \Delta(\boldsymbol{r}) \\
+\Delta(\boldsymbol{r})^{*} & \frac{1}{2k_{F}\xi_{0}}\nabla^{2} + \mu
 \end{bmatrix}
 \begin{bmatrix}
-\mathcal{U}_{q}(\bm{r}) \\ \mathcal{V}_{q}(\bm{r})
+\mathcal{U}_{q}(\boldsymbol{r}) \\ \mathcal{V}_{q}(\boldsymbol{r})
 \end{bmatrix}
 =E_{q}
 \begin{bmatrix}
-\mathcal{U}_{q}(\bm{r}) \\ \mathcal{V}_{q}(\bm{r})
+\mathcal{U}_{q}(\boldsymbol{r}) \\ \mathcal{V}_{q}(\boldsymbol{r})
 \end{bmatrix} 
 $$
