@@ -19,7 +19,7 @@ $$
 $$
 
 Here, BdG eq is rewritten in dimensionless form using Pippard length $\xi_{0} = \hbar v_{F}/\Delta_{0}$ and zero-temperature bulk gap $\Delta_{0}$.
- $f(E_{q})$ is Fermi distribution function. Solutions in an isolated vortex, especially CdGM mode is given by following form.
+$f(E_{q})$ is Fermi distribution function. Solutions in an isolated vortex, especially CdGM mode is given by following form.
 
 $$
 \begin{bmatrix}
@@ -33,6 +33,7 @@ u_{n}(r)e^{i(n-1)\theta} \\
 v_{n}(r)e^{in\theta}
 \end{bmatrix}
 $$
+
 Here, $n$ corresponds to angular momentum quantum number, i.e. CdGM mode is characterized by this number. In this library, the range of $n$ is integers of in $[-70, 69]$. Note that the part of $u_{n}(r), v_{n}(r)$ in above formula is one of the target of this library, not $\mathcal{U}_{n}, \mathcal{V}_{n}$.
 
 ## Install
