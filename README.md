@@ -23,14 +23,12 @@ $f(E_{q})$ is Fermi distribution function. Solutions in an isolated vortex, espe
 
 $$
 \begin{bmatrix}
-\mathcal{U}_{n}(r, \theta) \\
-\mathcal{V}_{n}(r, \theta)
+\mathcal{U}_{n}(r, \theta) \\ \mathcal{V}_{n}(r, \theta)
 \end{bmatrix}
 =
 \frac{1}{\sqrt{2\pi}}
 \begin{bmatrix}
-u_{n}(r)e^{i(n-1)\theta} \\
-v_{n}(r)e^{in\theta}
+u_{n}(r)e^{i(n-1)\theta} \\ v_{n}(r)e^{in\theta}
 \end{bmatrix}
 $$
 
