@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sc-vortex-2d"
-version = "0.1.0"
+version = "0.1.1"
 description = "Numerical result of CdGM mode."
 authors = ["Shun Makino <shunmakino6211@gmail.com>"]
 repository = "https://github.com/ShuN6211/sc-vortex-2d"
@@ -10,7 +10,6 @@ packages = [{include = "sc_vortex_2d", from = "src"}]
 [tool.poetry.dependencies]
 python = "^3.9"
 scipy = "^1.9.3"
-importlib = "^1.0.4"
 
 
 [tool.poetry.group.dev.dependencies]
