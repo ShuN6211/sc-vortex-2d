@@ -100,7 +100,7 @@ class VortexInstanceT03(VortexInstance):
 
         This method returns ith eigen functions (u, v) at T = 0.3 T_c.
         Radial coordinates is scaled by inverse of fermi wave number.
-        As u and v have dimension of L.L, value of them
+        As u and v have dimension of inverse of L.L, value of them
         is scaled by 2 times fermi wave number. (k_F * k_F)
 
         Args:
@@ -182,7 +182,7 @@ class VortexInstanceT05(VortexInstance):
 
         This method returns ith eigen functions (u, v) at T = 0.5 T_c.
         Radial coordinates is scaled by inverse of fermi wave number.
-        As (u, v) have dimension of L.L, value of them
+        As (u, v) have dimension of inverse of L.L, value of them
         is scaled by 2 times fermi wave number. (k_F * k_F)
 
         Args:
@@ -264,7 +264,7 @@ class VortexInstanceT08(VortexInstance):
 
         This method returns ith eigen functions (u, v) at T = 0.8 T_c.
         Radial coordinates is scaled by inverse of fermi wave number.
-        As (u, v) have dimension of L.L, value of them
+        As (u, v) have dimension of inverse of L.L, value of them
         is scaled by 2 times fermi wave number. (k_F * k_F)
 
         Args:
