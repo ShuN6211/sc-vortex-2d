@@ -44,7 +44,7 @@ You can install via [PyPI](https://pypi.org/). For example,
 ```
 
 ## Usage
-```
+```python
 """Sample python code"""
 
 from sc_vortex_2d.vortex import VortexInstanceT03
