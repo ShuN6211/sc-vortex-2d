@@ -43,5 +43,23 @@ You can install via [PyPI](https://pypi.org/). For example,
  $ pip install  sc-vortex-2d 
 ```
 
+## Usage
+```
+"""Sample python code"""
+
+from sc_vortex_2d.vortex import VortexInstanceT03
+from scipy import interpolate
+
+instance: VortexInstanceT03 = VortexInstanceT03()
+
+delta: interpolate.CubicSpline = instance.get_pair_potential() 
+
+e0: float = instance.get_ith_eigen_energy(0) # lowest energy level in the region of e > 0.
+
+u0, v0 = instance.get_ith_eigen_func(0) # get wave functions
+
+params = instance.Parameters # Parameters of the system. Enum.
+
+```
 ## Link
 https://webpark1378.sakura.ne.jp/
