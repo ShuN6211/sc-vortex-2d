@@ -54,7 +54,7 @@ instance: VortexInstanceT03 = VortexInstanceT03()
 
 delta: interpolate.CubicSpline = instance.get_pair_potential() 
 
-e0 = instance.get_ith_eigen_energy(0) # lowest energy level in the region of e > 0.
+e0: float = instance.get_ith_eigen_energy(0) # lowest energy level in the region of e > 0.
 
 u0, v0 = instance.get_ith_eigen_func(0) # get wave functions
 
