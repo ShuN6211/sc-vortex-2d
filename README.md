@@ -61,5 +61,5 @@ u0, v0 = instance.get_ith_eigen_func(0) # get wave functions
 params = instance.Parameters # Parameters of the system. Enum.
 
 ```
-## Link
+## Links
 https://webpark1378.sakura.ne.jp/
