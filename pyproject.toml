@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sc-vortex-2d"
-version = "0.1.1"
+version = "0.1.0"
 description = "Numerical result of CdGM mode."
 authors = ["Shun Makino <shunmakino6211@gmail.com>"]
 repository = "https://github.com/ShuN6211/sc-vortex-2d"
