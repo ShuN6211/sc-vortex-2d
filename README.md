@@ -37,6 +37,11 @@ $$
 Here, $n$ corresponds to angular momentum quantum number, i.e. CdGM mode is characterized by this number. In this library, the range of $n$ is integers of in $[-70, 69]$. Note that the part of $u_{n}(r), v_{n}(r)$ in the right side of above formula is one of the target of this library, not the left side of it.
 
 ## Install
+You can install via [PyPI](https://pypi.org/). For example,
+
+```
+ $ pip install  sc-vortex-2d 
+```
 
 ## Link
 https://webpark1378.sakura.ne.jp/
