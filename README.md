@@ -1,9 +1,10 @@
 # sc-vortex-2d
-This library provide numerical result of s-wave Caroli-de Gennes-Matricon mode (CdGM mode) at $T/T_c=0.3, 0.5, 0.8$.
-You can get eigenenergy, eigenfunction and pair potential at each temperature.
+This library provide numerical results of s-wave Caroli-de Gennes-Matricon mode (CdGM mode) at 
+$T/T_c=0.3, 0.5, 0.8$.
+You can get the eigenenergy, eigenfunction and pair potential at each temperature.
 
 ## Description
-It is known that there is low-energy excitation levels inside the s-wave vortex core in the superconductor.
+It is known that there are low-energy excitation levels inside the s-wave vortex core in the superconductor.
 These states are got by solving following Bogoliubov-de Gennes equation(BdG eq) self-consistently.
 
 $$
