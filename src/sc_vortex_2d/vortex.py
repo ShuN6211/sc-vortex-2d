@@ -37,8 +37,8 @@ class GeneralParameters(Enum):
     """
 
     KF_XI = 50
-    MAX_ANGULAR_MOMENTUM = 69
-    MIN_ANGULAR_MOMENTUM = -70
+    MAX_ANGULAR_MOMENTUM = 99
+    MIN_ANGULAR_MOMENTUM = -100
     SIZE_KF = 400
 
 
