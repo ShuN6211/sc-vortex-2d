@@ -13,9 +13,9 @@ def make_instance() -> VortexInstanceT05:
 
 def test_instance(make_instance):
     instance: VortexInstanceT05 = make_instance
-    assert len(instance.spectra_dict) == 140
-    assert len(instance.u_dict) == 140
-    assert len(instance.v_dict) == 140
+    assert len(instance.spectra_dict) == 200
+    assert len(instance.u_dict) == 200
+    assert len(instance.v_dict) == 200
 
 
 def test_get_pair_potential(make_instance):
