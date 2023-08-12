@@ -64,3 +64,4 @@ params = instance.Parameters # Parameters of the system. Enum.
 ```
 ## Links
 https://webpark1378.sakura.ne.jp/
+[F. Gygi and M. Schlüter, Phys. Rev. B, 41, 822 (1990)](https://journals.aps.org/prb/abstract/10.1103/PhysRevB.41.822)
