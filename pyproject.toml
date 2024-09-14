@@ -8,7 +8,7 @@ readme = "README.md"
 packages = [{include = "sc_vortex_2d", from = "src"}]
 
 [tool.poetry.dependencies]
-python =  ">=3.9,<3.13"
+python =  ">=3.9"
 scipy = "^1.10.0"
 
 
