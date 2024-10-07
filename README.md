@@ -49,11 +49,11 @@ You can install via [PyPI](https://pypi.org/). For example,
 """Sample python code"""
 
 from sc_vortex_2d.vortex import VortexInstanceT03
-from scipy import interpolate
+from scipy.interpolate import CubicSpline
 
 instance: VortexInstanceT03 = VortexInstanceT03()
 
-delta: interpolate.CubicSpline = instance.get_pair_potential() 
+delta: CubicSpline = instance.get_pair_potential() 
 
 e0: float = instance.get_ith_eigen_energy(0) # lowest energy level in the region of e > 0.
 
